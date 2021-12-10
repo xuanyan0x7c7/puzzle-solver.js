@@ -1,0 +1,38 @@
+{
+  "name": "@xuanyan/puzzle-solver",
+  "version": "0.0.0",
+  "description": "Puzzle solver based on dancing links algorithm",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rollup -c rollup.config.js",
+    "prebuild": "rimraf dist",
+    "lint": "eslint src/**/*.ts --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xuanyan0x7c7/puzzle-solver.js.git"
+  },
+  "author": "Xuan Yan <xuanyan@xuanyan.ws>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xuanyan0x7c7/puzzle-solver.js/issues"
+  },
+  "homepage": "https://github.com/xuanyan0x7c7/puzzle-solver.js#readme",
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^21.0.1",
+    "@rollup/plugin-node-resolve": "^13.0.6",
+    "@typescript-eslint/eslint-plugin": "^5.6.0",
+    "@typescript-eslint/parser": "^5.6.0",
+    "eslint": "^8.4.1",
+    "eslint-plugin-import": "^2.25.3",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.61.0",
+    "rollup-plugin-sourcemaps": "^0.6.3",
+    "rollup-plugin-typescript2": "^0.31.1",
+    "tslib": "^2.3.1",
+    "typescript": "^4.5.3"
+  }
+}
