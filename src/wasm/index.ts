@@ -2,18 +2,18 @@ import module from './puzzle-solver.wasm';
 
 interface WasmExports extends WebAssembly.Exports {
   memory: WebAssembly.Memory;
-  __wbg_puzzlesolver_free(a: number): void;
+  __wbg_puzzlesolver_free(pointer: number): void;
   puzzlesolver_new(): number;
-  puzzlesolver_newConditionalConstraint(a: number, b: number): number;
-  puzzlesolver_addRows(a: number, b: number): number;
-  puzzlesolver_addColumn(a: number, b: number): void;
-  puzzlesolver_addConditionalColumn(a: number, b: number, c: number): void;
-  puzzlesolver_addConstraint(a: number, b: number): void;
-  puzzlesolver_selectRow(a: number, b: number): void;
-  puzzlesolver_deselectRow(a: number, b: number): void;
-  puzzlesolver_solveNext(a: number): number;
-  __wbindgen_malloc(a: number): number;
-  __wbindgen_realloc(a: number, b: number, c: number): number;
+  puzzlesolver_newConditionalConstraint(pointer: number, holes: number): number;
+  puzzlesolver_addRows(pointer: number, rowCount: number): number;
+  puzzlesolver_addColumn(pointer: number, rows: number): void;
+  puzzlesolver_addConditionalColumn(pointer: number, rows: number, conditionalIndex: number): void;
+  puzzlesolver_addConstraint(pointer: number, rows: number): void;
+  puzzlesolver_selectRow(pointer: number, row: number): void;
+  puzzlesolver_deselectRow(pointer: number, row: number): void;
+  puzzlesolver_solveNext(pointer: number): number;
+  __wbindgen_malloc(size: number): number;
+  __wbindgen_realloc(pointer: number, oldSize: number, newSize: number): number;
 }
 
 let wasm: WasmExports | null = null;
@@ -97,17 +97,9 @@ function encodeString(arg: string, view: Uint8Array) {
 
 function passStringToWasm0(
   arg: string,
-  malloc: (size: number) => number,
-  realloc: ((pointer: number, oldSize: number, newSize: number) => number) | undefined
+  malloc: WasmExports['__wbindgen_malloc'],
+  realloc: WasmExports['__wbindgen_realloc']
 ) {
-  if (realloc === undefined) {
-    const buf = cachedTextEncoder.encode(arg);
-    const ptr = malloc(buf.length);
-    getUint8Memory0().subarray(ptr, ptr + buf.length).set(buf);
-    WASM_VECTOR_LEN = buf.length;
-    return ptr;
-  }
-
   let len = arg.length;
   let ptr = malloc(len);
 
