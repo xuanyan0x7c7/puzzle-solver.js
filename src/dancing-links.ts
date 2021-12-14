@@ -4,7 +4,12 @@ class Node {
   left: Node;
   right: Node;
 
-  constructor(public row: number, public column: number, rowHead: Node | null, columnHead: Node | null) {
+  constructor(
+    public readonly row: number,
+    public readonly column: number,
+    rowHead: Node | null,
+    columnHead: Node | null
+  ) {
     if (rowHead == null) {
       this.left = this.right = this;
     } else {
@@ -22,11 +27,20 @@ class Node {
       columnHead.up = this;
     }
   }
+
+  * traverse(direction: 'up' | 'down' | 'left' | 'right', { includeSelf = false } = {}) {
+    if (includeSelf) {
+      yield this;
+    }
+    for (let iter = this[direction]; iter !== this; iter = iter[direction]) {
+      yield iter;
+    }
+  }
 }
 
 type ConditionalState = {
-  head: Node;
-  holes: number;
+  readonly head: Node;
+  readonly holes: number;
   currentHoles: number;
   chaining: boolean;
 };
@@ -46,7 +60,7 @@ type Row = { head: Node; chosen: boolean };
 type Column = { type: ColumnType; head: Node; count: number };
 
 export default class Solver {
-  private head = new Node(-1, -1, null, null);
+  private readonly head = new Node(-1, -1, null, null);
   private rows: Row[] = [];
   private columns: Column[] = [];
   private conditionalStates: ConditionalState[] = [];
@@ -91,14 +105,14 @@ export default class Solver {
 
   selectRow(row: number) {
     const rowItem = this.rows[row];
-    for (const node of this.traverse(rowItem.head, 'right', { includeSelf: true })) {
+    for (const node of rowItem.head.traverse('right', { includeSelf: true })) {
       this.removeColumn(this.columns[node.column]);
     }
     rowItem.chosen = true;
   }
 
   deselectRow(row: number) {
-    for (const node of this.traverse(this.rows[row].head, 'right', { includeSelf: true })) {
+    for (const node of this.rows[row].head.traverse('right', { includeSelf: true })) {
       if (node.up.down === node) {
         const columnItem = this.columns[node.column];
         if (--columnItem.count === 0) {
@@ -134,13 +148,13 @@ export default class Solver {
         break;
       }
       this.removeColumn(minColumn);
-      for (const rowNode of this.traverse(minColumn.head, 'down')) {
+      for (const rowNode of minColumn.head.traverse('down')) {
         this.rows[rowNode.row].chosen = true;
-        for (const columnNode of this.traverse(rowNode, 'right')) {
+        for (const columnNode of rowNode.traverse('right')) {
           this.removeColumn(this.columns[columnNode.column]);
         }
         yield* this.solve();
-        for (const columnNode of this.traverse(rowNode, 'left')) {
+        for (const columnNode of rowNode.traverse('left')) {
           this.resumeColumn(this.columns[columnNode.column]);
         }
         this.rows[rowNode.row].chosen = false;
@@ -177,15 +191,6 @@ export default class Solver {
     return column;
   }
 
-  private* traverse(node: Node, direction: 'up' | 'down' | 'left' | 'right', { includeSelf = false } = {}) {
-    if (includeSelf) {
-      yield node;
-    }
-    for (let iter = node[direction]; iter !== node; iter = iter[direction]) {
-      yield iter;
-    }
-  }
-
   private removeColumn(column: Column) {
     if (column.count === 0) {
       if (column.type.name === ColumnTypeName.ConditionalUnique) {
@@ -194,8 +199,8 @@ export default class Solver {
     }
     column.head.left.right = column.head.right;
     column.head.right.left = column.head.left;
-    for (const rowNode of this.traverse(column.head, 'down')) {
-      for (const columnNode of this.traverse(rowNode, 'right')) {
+    for (const rowNode of column.head.traverse('down')) {
+      for (const columnNode of rowNode.traverse('right')) {
         const columnItem = this.columns[columnNode.column];
         if (--columnItem.count === 0) {
           if (columnItem.type.name === ColumnTypeName.ConditionalUnique) {
@@ -216,8 +221,8 @@ export default class Solver {
     }
     column.head.left.right = column.head;
     column.head.right.left = column.head;
-    for (const rowNode of this.traverse(column.head, 'up')) {
-      for (const columnNode of this.traverse(rowNode, 'left')) {
+    for (const rowNode of column.head.traverse('up')) {
+      for (const columnNode of rowNode.traverse('left')) {
         const columnItem = this.columns[columnNode.column];
         if (columnItem.count++ === 0) {
           if (columnItem.type.name === ColumnTypeName.ConditionalUnique) {
@@ -233,7 +238,7 @@ export default class Solver {
   private pickBestColumn() {
     let minColumn: Column | null = null;
 
-    for (const node of this.traverse(this.head, 'right')) {
+    for (const node of this.head.traverse('right')) {
       const column = this.columns[node.column];
       if (!minColumn || column.count < minColumn.count) {
         if (column.count === 1) {
@@ -248,7 +253,7 @@ export default class Solver {
 
     for (const state of this.conditionalStates) {
       if (state.chaining) {
-        for (const node of this.traverse(state.head, 'right')) {
+        for (const node of state.head.traverse('right')) {
           const column = this.columns[node.column];
           if (!minColumn || column.count < minColumn.count) {
             if (column.count === 1) {
