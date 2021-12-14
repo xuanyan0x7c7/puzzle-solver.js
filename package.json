@@ -3,12 +3,16 @@
   "version": "0.0.0",
   "description": "Puzzle solver based on dancing links algorithm",
   "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "rollup -c rollup.config.js",
+    "build": "npm run build:main && npm run build:light",
     "prebuild": "rimraf dist",
+    "build:main": "rollup -c rollup.config.ts",
+    "build:light": "rollup -c rollup.light.config.ts",
     "lint": "eslint src/**/*.ts --fix"
   },
   "repository": {
@@ -24,6 +28,7 @@
   "devDependencies": {
     "@rollup/plugin-commonjs": "^21.0.1",
     "@rollup/plugin-node-resolve": "^13.0.6",
+    "@rollup/plugin-wasm": "^5.1.2",
     "@typescript-eslint/eslint-plugin": "^5.6.0",
     "@typescript-eslint/parser": "^5.6.0",
     "eslint": "^8.4.1",
