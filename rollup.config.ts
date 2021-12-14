@@ -1,6 +1,6 @@
+import typescript from '@rollup/plugin-typescript';
 import wasm from '@rollup/plugin-wasm';
 import sourcemaps from 'rollup-plugin-sourcemaps';
-import typescript from 'rollup-plugin-typescript2';
 
 export default {
   input: 'src/index.ts',
@@ -18,7 +18,7 @@ export default {
     },
   ],
   plugins: [
-    typescript(),
+    typescript({ tsconfig: './tsconfig.json' }),
     wasm({ maxFileSize: Infinity }),
     sourcemaps(),
   ],

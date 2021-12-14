@@ -1,8 +1,11 @@
 {
+  "include": ["src"],
+  "exclude": ["dist"],
   "compilerOptions": {
     "module": "esnext",
     "moduleResolution": "node",
     "declaration": true,
+    "declarationDir": ".",
     "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
@@ -13,7 +16,7 @@
     "target": "ESNext",
     "sourceMap": true,
     "incremental": true,
-    "outDir": "./dist",
-    "baseUrl": "./src"
+    "outDir": "dist",
+    "baseUrl": "src"
   }
 }

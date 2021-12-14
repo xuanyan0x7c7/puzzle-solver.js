@@ -1,5 +1,5 @@
+import typescript from '@rollup/plugin-typescript';
 import sourcemaps from 'rollup-plugin-sourcemaps';
-import typescript from 'rollup-plugin-typescript2';
 
 export default {
   input: 'src/light.ts',
@@ -17,7 +17,7 @@ export default {
     },
   ],
   plugins: [
-    typescript(),
+    typescript({ tsconfig: './tsconfig.json' }),
     sourcemaps(),
   ],
 };
