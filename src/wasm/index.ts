@@ -1,3 +1,4 @@
+import BaseSolver from '../base-solver';
 import module from './puzzle-solver.wasm';
 
 interface WasmExports extends WebAssembly.Exports {
@@ -137,10 +138,11 @@ function getStringFromWasm0(ptr: number, len: number) {
   return cachedTextDecoder.decode(getUint8Memory0().subarray(ptr, ptr + len));
 }
 
-export default class PuzzleSolver {
+export default class PuzzleSolver extends BaseSolver {
   private ptr = 0;
 
   constructor() {
+    super();
     this.ptr = wasm!.puzzlesolver_new();
   }
 

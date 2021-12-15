@@ -1,3 +1,5 @@
+import BaseSolver from 'base-solver';
+
 class Node {
   up: Node;
   down: Node;
@@ -59,11 +61,13 @@ type ColumnType =
 type Row = { head: Node; chosen: boolean };
 type Column = { type: ColumnType; head: Node; count: number };
 
-export default class Solver {
+export default class PuzzleSolver extends BaseSolver {
   private readonly head = new Node(-1, -1, null, null);
   private rowList: Row[] = [];
   private columnList: Column[] = [];
   private conditionalStateList: ConditionalState[] = [];
+
+  free() {}
 
   newConditionalConstraint(holes: number) {
     const head = new Node(-1, -1, null, null);
