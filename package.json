@@ -2,9 +2,21 @@
   "name": "@xuanyan/puzzle-solver",
   "version": "0.0.0",
   "description": "Puzzle solver based on dancing links algorithm",
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./light": {
+      "import": "./dist/light.mjs",
+      "require": "./dist/light.js",
+      "types": "./dist/light.d.ts"
+    }
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
@@ -16,10 +28,7 @@
     "lint": "eslint src/**/*.ts test/**/*.ts --fix",
     "test": "TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' mocha"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/xuanyan0x7c7/puzzle-solver.js.git"
-  },
+  "repository": "github:xuanyan0x7c7/puzzle-solver.js",
   "author": "Xuan Yan <xuanyan@xuanyan.ws>",
   "license": "MIT",
   "bugs": {
