@@ -1,4 +1,4 @@
-import BaseSolver from 'base-solver';
+import BaseSolver from './base-solver';
 
 class Node {
   up: Node;
@@ -67,7 +67,7 @@ export default class PuzzleSolver extends BaseSolver {
   private columnList: Column[] = [];
   private conditionalStateList: ConditionalState[] = [];
 
-  free() {}
+  free() { }
 
   newConditionalConstraint(holes: number) {
     const head = new Node(-1, -1, null, null);
