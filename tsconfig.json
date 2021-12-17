@@ -1,6 +1,10 @@
 {
-  "include": ["src"],
-  "exclude": ["dist"],
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "dist"
+  ],
   "compilerOptions": {
     "module": "esnext",
     "moduleResolution": "node",

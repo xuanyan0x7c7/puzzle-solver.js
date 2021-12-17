@@ -7,5 +7,5 @@ export default abstract class BaseSolver {
   abstract addConstraint(rows: number[]): void;
   abstract selectRow(row: number): void;
   abstract deselectRow(row: number): void;
-  abstract solve(): Generator<number[], void, void>;
+  abstract solve(): Iterable<number[]>;
 }

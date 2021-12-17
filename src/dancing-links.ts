@@ -133,7 +133,7 @@ export default class PuzzleSolver extends BaseSolver {
     }
   }
 
-  * solve(): Generator<number[], void, void> {
+  * solve(): Iterable<number[]> {
     if (this.conditionalStateList.some(state => state.currentHoles > state.holes)) {
       return;
     } else if (this.head.right === this.head) {

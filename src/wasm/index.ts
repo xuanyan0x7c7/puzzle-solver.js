@@ -192,7 +192,7 @@ export default class PuzzleSolver extends BaseSolver {
     wasm!.puzzlesolver_deselectRow(this.ptr, row);
   }
 
-  * solve(): Generator<number[], void, void> {
+  * solve(): Iterable<number[]> {
     while (true) {
       const ret = wasm!.puzzlesolver_solveNext(this.ptr);
       const solution = takeObject(ret);
