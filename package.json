@@ -1,6 +1,6 @@
 {
   "name": "@xuanyan/puzzle-solver",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Puzzle solver based on dancing links algorithm",
   "exports": {
     ".": {
