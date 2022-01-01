@@ -42,7 +42,13 @@
     ],
     "comma-dangle": [
       "warn",
-      "always-multiline"
+      {
+        "arrays": "always-multiline",
+        "objects": "always-multiline",
+        "imports": "always-multiline",
+        "exports": "always-multiline",
+        "functions": "always-multiline"
+      }
     ],
     "comma-spacing": "warn",
     "comma-style": "warn",
@@ -232,7 +238,8 @@
     "yoda": "error",
     "@typescript-eslint/array-type": "warn",
     "@typescript-eslint/consistent-type-imports": [
-      "warn", {
+      "warn",
+      {
         "prefer": "type-imports"
       }
     ],
@@ -291,9 +298,8 @@
         "allowTemplateLiterals": true
       }
     ],
-    "@typescript-eslint/semi": [
-      "warn"
-    ],
+    "@typescript-eslint/semi": "warn",
+    "@typescript-eslint/type-annotation-spacing": "warn",
     "@typescript-eslint/space-before-function-paren": [
       "warn",
       {
