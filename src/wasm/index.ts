@@ -99,7 +99,7 @@ function encodeString(arg: string, view: Uint8Array) {
 function passStringToWasm0(
   arg: string,
   malloc: WasmExports['__wbindgen_malloc'],
-  realloc: WasmExports['__wbindgen_realloc']
+  realloc: WasmExports['__wbindgen_realloc'],
 ) {
   let len = arg.length;
   let ptr = malloc(len);

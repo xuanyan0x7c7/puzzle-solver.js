@@ -35,7 +35,7 @@ function create2DArray<T>(rows: number, columns: number, valueFn: () => T) {
 export function* solvePuzzle(
   solver: BaseSolver,
   boardSize: {rows: number; columns: number},
-  tileStrings: string[][]
+  tileStrings: string[][],
 ) {
   try {
     const basicTiles = tileStrings.map(s => parseTile(s));

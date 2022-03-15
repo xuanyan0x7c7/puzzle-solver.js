@@ -65,7 +65,7 @@
       "smart"
     ],
     "for-direction": "error",
-    "func-call-spacing": "warn",
+    "func-call-spacing": "off",
     "func-name-matching": "warn",
     "func-style": [
       "warn",
@@ -94,7 +94,7 @@
         "ignoreChainWithDepth": 3
       }
     ],
-    "no-array-constructor": "error",
+    "no-array-constructor": "off",
     "no-buffer-constructor": "error",
     "no-caller": "error",
     "no-console": "off",
@@ -161,6 +161,7 @@
     "no-useless-call": "error",
     "no-useless-computed-key": "warn",
     "no-useless-concat": "warn",
+    "no-useless-constructor": "off",
     "no-useless-rename": "warn",
     "no-useless-return": "warn",
     "no-unneeded-ternary": "warn",
@@ -213,9 +214,7 @@
     ],
     "require-yield": "off",
     "rest-spread-spacing": "warn",
-    "semi": [
-      "warn"
-    ],
+    "semi": "off",
     "semi-spacing": "warn",
     "semi-style": "warn",
     "space-before-blocks": "warn",
@@ -246,6 +245,7 @@
     "@typescript-eslint/default-param-last": "error",
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/func-call-spacing": "warn",
     "@typescript-eslint/indent": [
       "warn",
       2
@@ -273,6 +273,7 @@
         ]
       }
     ],
+    "@typescript-eslint/no-array-constructor": "error",
     "@typescript-eslint/no-duplicate-imports": "warn",
     "@typescript-eslint/no-empty-function": "off",
     "@typescript-eslint/no-explicit-any": "off",
@@ -288,6 +289,7 @@
       }
     ],
     "@typescript-eslint/no-use-before-define": "error",
+    "@typescript-eslint/no-useless-constructor": "warn",
     "@typescript-eslint/prefer-for-of": "warn",
     "@typescript-eslint/prefer-optional-chain": "warn",
     "@typescript-eslint/quotes": [
