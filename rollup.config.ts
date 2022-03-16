@@ -1,8 +1,9 @@
 import typescript from '@rollup/plugin-typescript';
-import wasm from '@rollup/plugin-wasm';
+import { defineConfig } from 'rollup';
+import copy from 'rollup-plugin-copy';
 import sourcemaps from 'rollup-plugin-sourcemaps';
 
-export default {
+export default defineConfig({
   input: 'src/index.ts',
   output: [
     {
@@ -17,9 +18,13 @@ export default {
       sourcemap: true,
     },
   ],
+  external: /\.wasm$/,
   plugins: [
     typescript({ tsconfig: './tsconfig.json' }),
-    wasm({ maxFileSize: Infinity }),
+    copy({
+      targets: [{ src: ['src/**/*.wasm', 'src/**/*.wasm.d.ts'], dest: 'dist' }],
+      flatten: false,
+    }),
     sourcemaps(),
   ],
-};
+});

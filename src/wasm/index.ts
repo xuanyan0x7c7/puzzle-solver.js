@@ -225,6 +225,6 @@ export async function init() {
         },
       },
     });
-    wasm = wasmModule.instance.exports as WasmExports;
+    wasm = wasmModule as WasmExports;
   }
 }
